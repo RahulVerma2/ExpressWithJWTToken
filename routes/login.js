@@ -46,4 +46,16 @@ router.post('/login', auth.createToken, (req, res) => {
 
 });
 
+router.post('/admin-login', auth.createToken, (req, res) => {
+    console.log(req.body);
+    var user = db.collection('login');
+    user.find({ 'username': req.body.username }).toArray(function (err, docs) {
+        var userObject = docs[0];
+    });
+    res.json({
+        token: res.token
+    })
+
+});
+
 module.exports = router;
