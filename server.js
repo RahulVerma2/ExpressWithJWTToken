@@ -16,12 +16,12 @@ const profile = require('./routes/login.js')
 // =======================
 // configuration =========
 // =======================
-var port = process.env.PORT || 8080; // used to create, sign, and verify tokens
+var port = process.env.PORT || 3000; // used to create, sign, and verify tokens
 // mongoose.connect(config.database); // connect to database
 // app.set('superSecret', config.secret); // secret variable
 
 // use body parser so we can get info from POST and/or URL parameters
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(function(req, res, next) {
@@ -33,6 +33,11 @@ app.use(function(req, res, next) {
 
 /* Used to create the api.*/
 app.use('/profile', profile);
+
+app.post("/login", function(req, res){
+    console.log(req.body)
+}
+);
 
 
 // =======================
