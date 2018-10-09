@@ -8,7 +8,9 @@ const app         = express();
 const bodyParser  = require('body-parser');
 
 
-const profile = require('./routes/login.js')
+const profile = require('./routes/login.js');
+const stocks = require('./routes/stocks.js');
+
 // var mongoose    = require('mongoose');
 
 // =======================
@@ -24,6 +26,8 @@ var port = process.env.PORT || 3000; // used to create, sign, and verify tokens
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use(express.static('public'));
+
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -33,11 +37,8 @@ app.use(function(req, res, next) {
 
 /* Used to create the api.*/
 app.use('/profile', profile);
+app.use('/stocks', stocks)
 
-app.post("/login", function(req, res){
-    console.log(req.body)
-}
-);
 
 
 // =======================
