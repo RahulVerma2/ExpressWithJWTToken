@@ -10,6 +10,8 @@ const bodyParser  = require('body-parser');
 
 const profile = require('./routes/login.js');
 const stocks = require('./routes/stocks.js');
+const orders = require('./routes/orders.js');
+const purchase = require('./routes/purchase.js');
 
 // var mongoose    = require('mongoose');
 
@@ -18,7 +20,7 @@ const stocks = require('./routes/stocks.js');
 // =======================
 // configuration =========
 // =======================
-var port = process.env.PORT || 3000; // used to create, sign, and verify tokens
+var port = 3000; // used to create, sign, and verify tokens
 // mongoose.connect(config.database); // connect to database
 // app.set('superSecret', config.secret); // secret variable
 
@@ -37,7 +39,9 @@ app.use(function(req, res, next) {
 
 /* Used to create the api.*/
 app.use('/profile', profile);
-app.use('/stocks', stocks)
+app.use('/stocks', stocks);
+app.use('/orders', orders);
+app.use('/purchase', purchase);
 
 
 
@@ -57,6 +61,6 @@ app.use('/stocks', stocks)
 // =======================
 // start the server ======
 // =======================
-app.listen(port, ()=>{
+app.listen(port, '192.168.0.27', ()=>{
     console.log("server started");
 });

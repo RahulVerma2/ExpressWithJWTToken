@@ -26,9 +26,17 @@ router.post("/admin-login", auth.createToken, (req, res) => {
   user.find({ username: req.body.username }).toArray(function(err, docs) {
     var userObject = docs[0];
     if (userObject) {
-      res.json({
-        token: res.token
-      });
+      if(req.body.username === password){
+        res.json({
+          token: res.token
+        });
+      }
+      else{
+        res.json({
+          msg: "Invalid Credentials"
+        });
+      }
+      
     }
   });
 });

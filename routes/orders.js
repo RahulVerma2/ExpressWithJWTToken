@@ -21,18 +21,18 @@ mongoClient.connect(
 
 
 // API to return the details of vegetables.
-router.get("/vegetableDetail", (req, res) => {
+router.get("/getAllOrders", (req, res) => {
     console.log(db);
-    var vegetable = db.collection("vegetableDetail");
-    vegetable.find({}).toArray(function(err, docs) {
-        let vegetableArray = [];
+    var order = db.collection("orderDetails");
+    order.find({}).toArray(function(err, docs) {
+        let orderArray = [];
         for(let i=0; i<docs.length; i++){
-            let obj = Object.assign({}, docs[i]);
+            let obj = Object.assign({}, docs[i]);;
             delete obj._id;
-            vegetableArray.push(obj);
+            orderArray.push(obj);
         }
         res.json({
-            vegetableList: vegetableArray
+            orderList: orderArray
         });
     });
   });
