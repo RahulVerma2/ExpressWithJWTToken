@@ -27,7 +27,7 @@ router.post("/admin-login", auth.createToken, (req, res) => {
     var  userObject = docs[0];
     if (userObject) {
       console.log(userObject.password);
-      if(req.body.username === userObject.password){
+      if(req.body.password === userObject.password){
         res.json({
           token: res.token
         });
