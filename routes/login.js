@@ -24,9 +24,9 @@ router.post("/admin-login", auth.createToken, (req, res) => {
   console.log(req.body);
   var user = db.collection("adminLogin");
   user.find({ username: req.body.username }).toArray(function(err, docs) {
-    var userObject = docs[0];
+    var  userObject = docs[0];
     if (userObject) {
-      if(req.body.username === password){
+      if(req.body.username === userObject["password"]){
         res.json({
           token: res.token
         });
