@@ -61,6 +61,6 @@ app.use('/purchase', purchase);
 // =======================
 // start the server ======
 // =======================
-app.listen(port, '192.168.0.27', ()=>{
+app.listen(port, ()=>{
     console.log("server started");
 });
