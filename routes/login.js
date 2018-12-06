@@ -34,10 +34,17 @@ router.post("/admin-login", auth.createToken, (req, res) => {
       }
       else{
         res.json({
-          msg: "Invalid Credentials"
+          msg: "Invalid Credentials",
+          status: "Faliure"
         });
       }
       
+    }
+    else{
+      res.json({
+        msg: "Invalid Credentials",
+        status: "Faliure"
+      });
     }
   });
 });

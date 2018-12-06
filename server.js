@@ -12,6 +12,7 @@ const profile = require('./routes/login.js');
 const stocks = require('./routes/stocks.js');
 const orders = require('./routes/orders.js');
 const purchase = require('./routes/purchase.js');
+const rate = require('./routes/rate.js');
 
 // var mongoose    = require('mongoose');
 
@@ -42,6 +43,7 @@ app.use('/profile', profile);
 app.use('/stocks', stocks);
 app.use('/orders', orders);
 app.use('/purchase', purchase);
+app.use('/rate', rate);
 
 
 
