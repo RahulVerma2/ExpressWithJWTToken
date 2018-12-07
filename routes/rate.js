@@ -24,19 +24,25 @@ mongoClient.connect(
 router.post("/setLatestRate", auth.verifyToken,(req, res) => {
   console.log(db);
   var rate = db.collection("rateDetails");
-  rate.insertOne(
-    {
-      rateList: req.body.rateList,
-      date: req.body.date
-    },
-    function(err, result) {
-      if (err) {
-        res.send({ msg: "Faliure" });
-      } else {
-        res.send({ msg: "Success" });
-      }
-    }
-  );
+  rate.findOneAndDelete({date: req.body.date},(err, result) => {
+    if (err){
+      res.send({ msg: "Faliure" });
+    }else{
+      rate.insertOne(
+        {
+          rateList: req.body.rateList,
+          date: req.body.date
+        },
+        function(err, result) {
+          if (err) {
+            res.send({ msg: "Faliure" });
+          } else {
+            res.send({ msg: "Success" });
+          }
+        }
+      );
+    }});
+ 
 });
 
 // API to get rate list.

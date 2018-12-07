@@ -23,21 +23,28 @@ mongoClient.connect(
 // API to return the details of vegetables.
 router.post("/todaysPurchase", auth.verifyToken, (req, res) => {
   let purchase = db.collection("purchase");
-  purchase.insertOne(
-    {
-      purchaseList: req.body.purchaseList,
-      purchaseDate: req.body.purchaseDate,
-      totalPurchaseCost: req.body.totalPurchaseCost,
-      marketName: req.body.marketName
-    },
-    function(err, result) {
-      if (err) {
-        res.send({ msg: "Faliure" });
-      } else {
-        res.send({ msg: "Success" });
-      }
+  purchase.findOneAndDelete({purchaseDate: req.body.purchaseDate},(err, result) => {
+    if (err){
+      res.send({ msg: "Faliure" });
+    }else{
+      purchase.insertOne(
+        {
+          purchaseList: req.body.purchaseList,
+          purchaseDate: req.body.purchaseDate,
+          totalPurchaseCost: req.body.totalPurchaseCost,
+          marketName: req.body.marketName
+        },
+        function(err, result) {
+          if (err) {
+            res.send({ msg: "Faliure" });
+          } else {
+            res.send({ msg: "Success" });
+          }
+        }
+      );
     }
-  );
+  });
+ 
 });
 
 router.post("/getPurchaseDetails", auth.verifyToken, (req, res) => {
